@@ -26,15 +26,15 @@ def handle_message(message):
         "Content-Type": "application/json"
     }
     data = {
-        "model": "xiaomi/mimo-v2.5",
+        "model": "meta-llama/llama-3-8b-instruct:free",
         "messages": [{"role": "user", "content": message.text}]
     }
     try:
         response = requests.post(url, headers=headers, json=data)
         answer = response.json()['choices'][0]['message']['content']
         bot.reply_to(message, answer)
-    except Exception:
-        bot.reply_to(message, "Ошибка при запросе к ИИ. Попробуйте позже.")
+    except Exception as e:
+        bot.reply_to(message, f"Ошибка: {e}")
 
 if __name__ == "__main__":
     Thread(target=run_web).start()
