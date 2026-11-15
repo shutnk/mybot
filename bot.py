@@ -26,7 +26,7 @@ def handle_message(message):
         "Content-Type": "application/json"
     }
     data = {
-        "model": "meta-llama/llama-3-8b-instruct:free",
+        "model": "openrouter/free",
         "messages": [{"role": "user", "content": message.text}]
     }
     try:
