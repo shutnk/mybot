@@ -31,7 +31,7 @@ def handle_message(message):
     }
     try:
         response = requests.post(url, headers=headers, json=data)
-        answer = response.json()['choices'][0]['message']['content']
+        answer = response.json().get('choices', [{}])[0].get('message', {}).get('content', f"Ответ OpenRouter: {response.text}")
         bot.reply_to(message, answer)
     except Exception as e:
         bot.reply_to(message, f"Ошибка: {e}")
